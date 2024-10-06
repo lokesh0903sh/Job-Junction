@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Navbar from "./shared/Navbar";
 import { Avatar, AvatarImage } from "./ui/avatar";
 import { Button } from "./ui/button";
@@ -6,11 +6,13 @@ import { Contact, Mail, Pen } from "lucide-react";
 import { Badge } from "./ui/badge";
 import { Label } from "./ui/label";
 import AppliedJobTable from "./AppliedJobTable";
+import UpdateProfileDialog from "./UpdateProfileDialog";
 
 const skills = ["HTML", "CSS", "javaScript", "Reactjs", "Node.js", "Express", "C++", "Data Structures", "Algorithms", "MongoDB", "SQL", "OOPS", "Tailwind CSS", "Bootstrap"];
+const isResume = true;
+const isPortfolio = true;
 const Profile = () => {
-    const isResume = true;
-    const isPortfolio = true;
+  const [open, setopen] = useState(false);
   return (
     <div>
       <Navbar />
@@ -31,7 +33,7 @@ const Profile = () => {
               </p>
             </div>
           </div>
-          <Button className="text-right" variant="outline">
+          <Button onClick = {()=>setopen(true)} className="text-right" variant="outline">
             <Pen />
           </Button>
         </div>
@@ -56,7 +58,7 @@ const Profile = () => {
         <div className="grid w-full max-w-sm items-center gap-1.5">
                 <Label className="text-md font-bold">Resume</Label>
                 {
-                    isResume ? <a className="text-blue-500 w-full hover:underline cursor-pointer" target="blank" href="https://drive.google.com/file/d/1_T6L2wiwUMeda7Vs5_SXf38gPfia8Spf/view?usp=sharing">Lokesh Resume</a>:<span>NA</span>
+                    isResume ? <a className="text-blue-500 w-full hover:underline cursor-pointer mb-3" target="blank" href="https://drive.google.com/file/d/1_T6L2wiwUMeda7Vs5_SXf38gPfia8Spf/view?usp=sharing">Lokesh Resume</a>:<span>NA</span>
                 }
         </div>
         <div className="grid w-full max-w-sm items-center gap-1.5">
@@ -73,6 +75,7 @@ const Profile = () => {
                 {/* APplication Table */}
                 <AppliedJobTable/>  
         </div>
+        <UpdateProfileDialog open={open} setopen={setopen}/>
     </div>
   );
 };
