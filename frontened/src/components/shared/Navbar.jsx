@@ -7,11 +7,35 @@ import React from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@radix-ui/react-avatar";
 import { Button } from "../ui/button";
 import { LogOut, User2 } from "lucide-react";
-import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { toast } from "sonner";
+import axios from "axios";
+import { setUser } from "@/redux/authSlice";
+import { USER_API_END_POINT } from '@/utils/constant'
 
 const Navbar = () => {
-    const {user} = useSelector(store=>store.auth)
+    const {user} = useSelector(store=>store.auth);
+    const dispatch = useDispatch();
+    const navigate = useNavigate()
+
+    const logoutHandler = async () => {
+        try {
+            const res = await axios.get(`${USER_API_END_POINT}/logout`,
+                {withCredentials: true}
+            );
+
+            if(res.data.success){
+                dispatch(setUser(null));
+                navigate("/");
+                toast.success(res.data.message);
+            }
+        } catch (error) {
+            console.log(error);
+            toast.error(error.response.data.message);
+        }
+    }
+
     return (
         <div className="bg-white">
             <div className="flex items-center justify-between mx-auto max-w-7xl h-16">
@@ -20,7 +44,7 @@ const Navbar = () => {
                         Job<span className="text-[#f83002]">Junction</span>
                     </h1>
                 </div>
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-4">
                     <ul className="flex font-medium items-center gap-5">
                         <li><Link to="/">Home</Link></li>
                         <li><Link to="/jobs">Jobs</Link></li>
@@ -34,19 +58,19 @@ const Navbar = () => {
                     ) : (
                         <Popover>
                             <PopoverTrigger asChild>
-                                <Avatar className="cursor-pointer w-6 h-6">
-                                    <AvatarImage
-                                        src="https://github.com/shadcn.png"
+                                <Avatar className="cursor-pointer w-7 h-7">
+                                    <AvatarImage className='rounded-full w-7 h-7'
+                                        src={user?.profile?.profilePhoto}
                                         alt="@shadcn"
                                     />
                                 </Avatar>
                             </PopoverTrigger>
-                            <PopoverContent className="w-80">
-                                <div className="">
+                            <PopoverContent className="w-80 mx-4 bg-gray-100 rounded-xl">
+                                <div className="mx-3 my-2">
                                     <div className="flex gap-4 space-y-2">
                                         <Avatar className="cursor-pointer w-7 h-7">
-                                            <AvatarImage
-                                                src="https://github.com/shadcn.png"
+                                            <AvatarImage className='rounded-full my-4 w-7 h-7' 
+                                                src={user?.profile?.profilePhoto}
                                                 alt="@shadcn"
                                             />
                                         </Avatar>
@@ -54,7 +78,7 @@ const Navbar = () => {
                                         <div>
                                             <h4 className="font-medium">Lokesh Sharma</h4>
                                             <p className="text-sm text-muted-foreground">
-                                                loreum kjsdbvjsd ksdbvkjsd lsdj
+                                                {user?.profile?.bio}
                                             </p>
                                         </div>
                                     </div>
@@ -65,7 +89,7 @@ const Navbar = () => {
                                         </div>
                                         <div className="flex w-fit items-center gap-2 cursor-pointer">
                                             <LogOut />
-                                            <Button variant="link">logout</Button>
+                                            <Button onClick={logoutHandler} variant="link">logout</Button>
                                         </div>
                                     </div>
                                 </div>
