@@ -51,7 +51,7 @@ const JobDescription = () => {
     },[jobId,dispatch, user?._id]);
 
   return (
-    <div className="max-w-7xl mx-auto my-10">
+    <div className="max-w-5xl mx-auto my-20 border border-gray-200 py-4 px-4 rounded-xl shadow-2xl">
       <div className="flex items-center justify-between">
         <div>
           <h1 className="font-bold text-xl">{singleJob?.title}</h1>
