@@ -14,7 +14,7 @@ import useGetCompanyById from '@/hooks/useGetCompanyById'
 const CompanySetup = () => {
     const params = useParams();
     useGetCompanyById(params.id);
-    const [input, setInput] = useState({ 
+    const [input, setInput] = useState({
         name: "",
         description: "",
         website: "",
@@ -58,7 +58,7 @@ const CompanySetup = () => {
             }
         } catch (error) {
             console.log(error);
-            toast.error(error.response.data.message);
+            toast.error(error.res.data.message);
         } finally {
             setLoading(false);
         }
@@ -77,16 +77,16 @@ const CompanySetup = () => {
     return (
         <div>
             <Navbar />
-            <div className='max-w-3xl mx-auto my-10 border shadow-2xl px-4 py-4 rounded-lg'>
+            <div className='max-w-xl mx-auto my-10'>
                 <form onSubmit={submitHandler}>
-                    <div className='flex items-center justify-between py-4'>
-                        <h1 className='font-bold text-2xl'>Company Setup</h1>
+                    <div className='flex items-center gap-5 p-8'>
                         <Button onClick={() => navigate("/admin/companies")} variant="outline" className="flex items-center gap-2 text-gray-500 font-semibold">
                             <ArrowLeft />
                             <span>Back</span>
                         </Button>
+                        <h1 className='font-bold text-xl'>Company Setup</h1>
                     </div>
-                    <div className='grid grid-cols-2 gap-4 py-2'>
+                    <div className='grid grid-cols-2 gap-4'>
                         <div>
                             <Label>Company Name</Label>
                             <Input

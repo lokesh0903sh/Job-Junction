@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom'
 
 const Job = ({job}) => {
     const navigate = useNavigate();
-    // const jobId = "jsjsgjdf";
+    const info = `${job?.description.substring(0, 200)}....`;
     const daysAgofunction = (mongodbTime)=>{
         const createdAt = new Date(mongodbTime);
         const currentTime = new Date();
@@ -24,7 +24,7 @@ const Job = ({job}) => {
         <div className='flex items-center gap-2 my-2'>  
             <Button variant='outline' className='w-12'>
                 <Avatar>
-                    <AvatarImage src='https://www.shutterstock.com/image-vector/circle-line-simple-design-logo-600nw-2174926871.jpg'/>
+                    <AvatarImage src={job?.company?.logo}/>
                 </Avatar>
             </Button>
             <div>
@@ -34,7 +34,10 @@ const Job = ({job}) => {
         </div>
         <div>
             <h1 className='font-bold text-lg my-2'>{job?.title}</h1>
-            <p className='text-sm text-gray-600'>{job?.description}</p>
+            <p className='text-sm text-gray-600'>{info}
+                    <span onClick={()=>navigate(`/description/${job._id}`)} className="text-[#F83002] cursor-pointer    " >
+                        ReadMore
+                    </span></p>
         </div>
         <div className='flex items-center gap-2 mt-4'>
             <Badge className='text-blue-700 font-bold ' variant="ghost">{job?.position} Positions</Badge>
