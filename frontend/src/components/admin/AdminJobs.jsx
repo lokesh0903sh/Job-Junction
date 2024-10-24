@@ -5,8 +5,8 @@ import { Button } from '../ui/button'
 import { useNavigate } from 'react-router-dom' 
 import { useDispatch } from 'react-redux' 
 import AdminJobsTable from './AdminJobsTable'
-import useGetAllAdminJobs from './src/hooks/useGetAllAdminJobs'
-import { setSearchJobByText } from './src/redux/jobSlice'
+import useGetAllAdminJobs from '.../src/hooks/useGetAllAdminJobs'
+import { setSearchJobByText } from '.../src/redux/jobSlice'
 
 const AdminJobs = () => {
   useGetAllAdminJobs();
