@@ -2,9 +2,8 @@ import React, { useEffect } from 'react'
 import Navbar from './shared/Navbar'
 import Job from './Job';
 import { useDispatch, useSelector } from 'react-redux';
-import { setSearchedQuery } from './redux/jobSlice';
-import useGetAllJobs from './hooks/useGetAllJobs';
-import { motion } from 'framer-motion';
+import { setSearchedQuery } from '@/redux/jobSlice';
+import useGetAllJobs from '@/hooks/useGetAllJobs';
 
 // const randomJobs = [1, 2,45];
 
@@ -26,14 +25,7 @@ const Browse = () => {
                     {
                         allJobs.map((job) => {
                             return (
-                                <motion.div
-                                    initial={{ opacity: 0, x: 100 }}
-                                    animate={{ opacity: 1, x: 0 }}
-                                    exit={{ opacity: 0, x: -100 }}
-                                    transition={{ duration: 0.3 }}
-                                    key={job?._id}>
-                                    <Job key={job._id} job={job}/>
-                                </motion.div>
+                                <Job key={job._id} job={job}/>
                             )
                         })
                     }
