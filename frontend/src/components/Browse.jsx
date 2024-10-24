@@ -2,8 +2,8 @@ import React, { useEffect } from 'react'
 import Navbar from './shared/Navbar'
 import Job from './Job';
 import { useDispatch, useSelector } from 'react-redux';
-import { setSearchedQuery } from '/src/redux/jobSlice';
-import useGetAllJobs from '/src/hooks/useGetAllJobs';
+import { setSearchedQuery } from './src/redux/jobSlice';
+import useGetAllJobs from './src/hooks/useGetAllJobs';
 import { motion } from 'framer-motion';
 
 // const randomJobs = [1, 2,45];
