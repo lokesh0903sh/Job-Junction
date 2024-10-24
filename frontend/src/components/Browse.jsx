@@ -4,6 +4,7 @@ import Job from './Job';
 import { useDispatch, useSelector } from 'react-redux';
 import { setSearchedQuery } from '@/redux/jobSlice';
 import useGetAllJobs from '@/hooks/useGetAllJobs';
+import { motion } from 'framer-motion';
 
 // const randomJobs = [1, 2,45];
 
@@ -25,7 +26,14 @@ const Browse = () => {
                     {
                         allJobs.map((job) => {
                             return (
-                                <Job key={job._id} job={job}/>
+                                <motion.div
+                                    initial={{ opacity: 0, x: 100 }}
+                                    animate={{ opacity: 1, x: 0 }}
+                                    exit={{ opacity: 0, x: -100 }}
+                                    transition={{ duration: 0.3 }}
+                                    key={job?._id}>
+                                    <Job key={job._id} job={job}/>
+                                </motion.div>
                             )
                         })
                     }
