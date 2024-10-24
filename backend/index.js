@@ -19,7 +19,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 app.use(cookieParser());
 const corsOptions = {
-    origin:"https://job-junction-tau.vercel.app",
+    origin:'https://job-junction-wbzk.onrender.com',
     credentials:true
 }
 
