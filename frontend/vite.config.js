@@ -5,6 +5,9 @@ import path from 'path';
 
 export default defineConfig({
   plugins: [react()],
+  build: {
+    outDir: 'dist', // This is the default; explicitly stating it is optional
+  },
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'), // Define '@' to point to 'src' directory
