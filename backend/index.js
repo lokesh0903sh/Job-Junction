@@ -19,7 +19,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 app.use(cookieParser());
 const corsOptions = {
-    origin:"job-junction-7zgh6ywm3-lokesh-sharmas-projects-a4159823.vercel.app",
+    origin:"https://job-junction-tau.vercel.app",
     credentials:true
 }
 
