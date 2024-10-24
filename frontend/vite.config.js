@@ -1,10 +1,8 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
+import { defineConfig } from 'vite';
 
-// https://vitejs.dev/config/
 export default defineConfig({
-  build: { manifest: true, outDir: './dist'},
-  base:  '/',
-  root: './src',
-  plugins: [react()],
-})
+  root: 'src',  // Tells Vite to look for index.html in the 'src' folder
+  build: {
+    outDir: '../dist',  // Adjust if needed for output folder
+  },
+});
