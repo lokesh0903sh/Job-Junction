@@ -68,6 +68,16 @@ const Signup = () => {
             dispatch(setLoading(false));
         }
     }
+    const generatePassword = () => {
+        const length = 10; // Set the desired password length
+        const charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+";
+        let generatedPassword = "";
+        for (let i = 0; i < length; i++) {
+            const randomIndex = Math.floor(Math.random() * charset.length);
+            generatedPassword += charset[randomIndex];
+        }
+        setInput({ ...input, password: generatedPassword }); // Set generated password
+    };
 
     useEffect(()=>{
         if(user){
@@ -116,15 +126,20 @@ const Signup = () => {
                             placeholder="123456789"
                         />
                     </div>
-                    <div className='my-2'>
-                        <Label>Password</Label>
-                        <Input
-                            type="password"
-                            value={input.password}
-                            name="password"
-                            onChange={changeEventHandler}
-                            placeholder="xxxxxxxxxxx"
-                        />
+                    <div className='my-2 flex'>
+                        <div className="w-[50%]">
+                            <Label>Password</Label>
+                            <Input
+                                type="password"
+                                value={input.password}
+                                name="password"
+                                onChange={changeEventHandler}
+                                placeholder="xxxxxxxxxxx"
+                            />
+                        </div>
+                        <div className="mx-6">
+                            <Button className="my-6" onClick={generatePassword}>Generate Random Password</Button>
+                        </div>
                     </div>
                     <div className='flex items-center justify-between'>
                         <RadioGroup className="flex items-center gap-4 my-5">
